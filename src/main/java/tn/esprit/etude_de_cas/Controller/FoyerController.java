@@ -2,6 +2,7 @@ package tn.esprit.etude_de_cas.Controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.etude_de_cas.Entity.Foyer;
 import tn.esprit.etude_de_cas.Service.FoyerServiceIMP;
@@ -32,5 +33,10 @@ public class FoyerController {
     @DeleteMapping("/deleteFoyer/{idF}")
     public void deleteFoyer(@PathVariable long idF){
         foyerServiceImp.deleteFoyer(idF);
+    }
+    @PostMapping("/affecter")
+    public ResponseEntity<String> affecterFoyerAUniversite(@RequestParam long idFoyer, @RequestParam String nomUniversity) {
+        foyerServiceImp.affecterFoyerAUniversite(idFoyer, nomUniversity);
+        return ResponseEntity.ok("Foyer affecté à l'université avec succès");
     }
 }

@@ -14,7 +14,7 @@ public class University implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idUniversite;
-    private long nomUniver;
+    private String nomUniversity;
     private String adress;
 
     @OneToOne

@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.etude_de_cas.Entity.Foyer;
+import tn.esprit.etude_de_cas.Entity.University;
 import tn.esprit.etude_de_cas.Reposity.FoyerRepo;
+import tn.esprit.etude_de_cas.Reposity.UniversityRepo;
 
 import java.util.List;
 @Service
@@ -12,6 +14,7 @@ import java.util.List;
 public class FoyerServiceIMP implements IFoyer{
     @Autowired
     private FoyerRepo foyerRepository;
+    private UniversityRepo universityRepo;
     @Override
     public Foyer addFoyer(Foyer f) {
         return foyerRepository.save(f);
@@ -35,5 +38,18 @@ public class FoyerServiceIMP implements IFoyer{
     @Override
     public void deleteFoyer(long idF) {
         foyerRepository.deleteById(idF);
+    }
+
+    @Override
+    public void affecterFoyerAUniversite(long idFoyer, String nomUniversity) {
+        Foyer foyer = foyerRepository.findById(idFoyer)
+                .orElseThrow(() -> new RuntimeException("Foyer non trouvé"));
+
+        University universite = universityRepo.findByNomUniversity(nomUniversity);
+        if (universite == null) {
+            throw new RuntimeException("Université non trouvée");
+        }
+        foyer.setUniversite(universite);
+        foyerRepository.save(foyer);
     }
 }
