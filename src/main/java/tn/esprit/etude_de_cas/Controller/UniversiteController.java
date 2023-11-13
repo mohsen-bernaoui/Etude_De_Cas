@@ -17,12 +17,12 @@ public class UniversiteController {
     }
 
     @PostMapping("/addUniversite")
-    public University addUniversite(University university) {
+    public University addUniversite(@RequestBody University university) {
         return iUniversite.addUniversite(university);
     }
 
     @PutMapping("/updateUniversite")
-    public University updateUniversite(University university) {
+    public University updateUniversite(@RequestBody University university) {
         return iUniversite.updateUniversite(university);
     }
 
