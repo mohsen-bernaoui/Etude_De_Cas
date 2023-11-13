@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import tn.esprit.etude_de_cas.Entity.University;
 @Repository
 public interface UniversityRepo extends JpaRepository<University,Long> {
-    University findByNomUniversity(String nomUniversity);
+    University findByNomUniversity(String nomUni);
     University findByIdUniversite(long IDUni);
     University findByAdress(String Adress);
 }

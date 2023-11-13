@@ -41,11 +41,11 @@ public class FoyerServiceIMP implements IFoyer{
     }
 
     @Override
-    public Foyer affecterFoyerAUniversite(long idFoyer, String nomUniversity) {
+    public Foyer affecterFoyerAUniversite(long idFoyer, String nomUniv) {
         Foyer foyer = foyerRepository.findById(idFoyer)
                 .orElseThrow(() -> new RuntimeException("Foyer non trouvé"));
 
-        University universite = universityRepo.findByNomUniversity(nomUniversity);
+        University universite = universityRepo.findByNomUniversity(nomUniv);
         if (universite == null) {
             throw new RuntimeException("Université non trouvée");
         }
