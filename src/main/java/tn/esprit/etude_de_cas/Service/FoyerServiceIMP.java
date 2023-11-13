@@ -41,7 +41,7 @@ public class FoyerServiceIMP implements IFoyer{
     }
 
     @Override
-    public void affecterFoyerAUniversite(long idFoyer, String nomUniversity) {
+    public Foyer affecterFoyerAUniversite(long idFoyer, String nomUniversity) {
         Foyer foyer = foyerRepository.findById(idFoyer)
                 .orElseThrow(() -> new RuntimeException("Foyer non trouvé"));
 
@@ -50,6 +50,6 @@ public class FoyerServiceIMP implements IFoyer{
             throw new RuntimeException("Université non trouvée");
         }
         foyer.setUniversite(universite);
-        foyerRepository.save(foyer);
+        return foyerRepository.save(foyer);
     }
 }

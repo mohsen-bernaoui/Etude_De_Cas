@@ -34,8 +34,8 @@ public class FoyerController {
     public void deleteFoyer(@PathVariable long idF){
         foyerServiceImp.deleteFoyer(idF);
     }
-    @PostMapping("/affecter")
-    public ResponseEntity<String> affecterFoyerAUniversite(@RequestParam long idFoyer, @RequestParam String nomUniversity) {
+    @PostMapping("/affecter/{idFoyer}/{nomUniversite}")
+    public ResponseEntity<String> affecterFoyerAUniversite(@PathVariable long idFoyer, @PathVariable String nomUniversity) {
         foyerServiceImp.affecterFoyerAUniversite(idFoyer, nomUniversity);
         return ResponseEntity.ok("Foyer affecté à l'université avec succès");
     }
