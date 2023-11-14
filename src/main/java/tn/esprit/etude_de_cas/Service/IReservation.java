@@ -14,4 +14,6 @@ public interface IReservation {
 
     Set<Reservation> findReservationsByEtudiantsIdEtudiant(long idEtudiant);
     Set<Reservation> findReservationsByEtudiantsNomEt(String nomEt);
+
+    Set<Reservation> findReservationsByEtudiantsNomStartsWithAB();
 }

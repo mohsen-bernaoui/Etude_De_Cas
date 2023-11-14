@@ -32,4 +32,9 @@ public class ReservationController {
         return iReservation.findReservationsByEtudiantsNomEt(nomEt);
     }
 
+  @GetMapping("/findReservationsByEtudiantsNomStartsWithAB")
+    public Set<Reservation> findReservationsByEtudiantsNomStartsWithAB() {
+        return iReservation.findReservationsByEtudiantsNomStartsWithAB();
+    }
+
 }
