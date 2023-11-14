@@ -42,5 +42,8 @@ private IBloc iBloc;
     public Set<Bloc> findBlocByTypeC(@PathVariable TypeChambre typC){
         return iBloc.findBlocByChambresType(typC);
     }
-
+    @GetMapping("/findBlocBychambres/{idChambre}")
+    public Bloc findBlocByChambres(@PathVariable long idChambre){
+        return iBloc.findBlocByChambresIdChambre(idChambre);
+    }
 }

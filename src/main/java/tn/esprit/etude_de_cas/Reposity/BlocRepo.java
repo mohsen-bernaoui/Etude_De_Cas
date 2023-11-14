@@ -11,5 +11,5 @@ import java.util.Set;
 @Repository
 public interface BlocRepo extends JpaRepository<Bloc,Long> {
     Set<Bloc> findBlocByChambresTypeC(TypeChambre typeC);
-
+    Bloc findBlocByChambresIdChambre(long idChambre);
 }

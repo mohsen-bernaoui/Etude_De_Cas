@@ -44,5 +44,10 @@ public class BlocServiceIMP implements IBloc{
         return blocRepo.findBlocByChambresTypeC(typeC);
     }
 
+    @Override
+    public Bloc findBlocByChambresIdChambre(long idChambre) {
+        return blocRepo.findBlocByChambresIdChambre(idChambre);
+    }
+
 
 }

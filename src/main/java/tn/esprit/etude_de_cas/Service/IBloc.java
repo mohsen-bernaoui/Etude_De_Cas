@@ -20,5 +20,5 @@ public interface IBloc {
     void removeBloc (long idBloc);
     Set<Bloc> findBlocByChambresType(TypeChambre typeC);
 
-
+    Bloc findBlocByChambresIdChambre(long idChambre);
 }
