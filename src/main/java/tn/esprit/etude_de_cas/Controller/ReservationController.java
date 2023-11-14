@@ -6,6 +6,7 @@ import tn.esprit.etude_de_cas.Entity.Reservation;
 import tn.esprit.etude_de_cas.Service.IReservation;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @AllArgsConstructor
@@ -21,4 +22,10 @@ public class ReservationController {
 
    @GetMapping("/retrieveReservation/{idReservation}")
     public Reservation retrieveReservation(@PathVariable String idReservation) {return iReservation.retrieveReservation(idReservation);}
+
+    @GetMapping("/findReservationsByEtudiantIdEtudiant/{idEtudiant}")
+    public Set<Reservation> findReservationsByEtudiantIdEtudiant(@PathVariable long idEtudiant) {
+        return iReservation.findReservationsByEtudiantsIdEtudiant(idEtudiant);
+    }
+
 }
