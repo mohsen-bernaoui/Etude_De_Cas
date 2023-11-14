@@ -27,5 +27,9 @@ public class ReservationController {
     public Set<Reservation> findReservationsByEtudiantIdEtudiant(@PathVariable long idEtudiant) {
         return iReservation.findReservationsByEtudiantsIdEtudiant(idEtudiant);
     }
+    @GetMapping("/findReservationsByEtudiantsNomEt/{nomEt}")
+    public Set<Reservation> findReservationsByEtudiantsNomEt(@PathVariable String nomEt) {
+        return iReservation.findReservationsByEtudiantsNomEt(nomEt);
+    }
 
 }

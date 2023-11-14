@@ -9,4 +9,5 @@ import java.util.Set;
 @Repository
 public interface ReservationRepo extends JpaRepository<Reservation,String> {
     Set<Reservation> findReservationsByEtudiantsIdEtudiant(long idEtudiant);
+    Set<Reservation> findReservationsByEtudiantsNomEt(String nomEt);
 }

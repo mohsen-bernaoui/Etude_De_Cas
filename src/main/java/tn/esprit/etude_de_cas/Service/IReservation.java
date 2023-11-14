@@ -13,4 +13,5 @@ public interface IReservation {
     Reservation retrieveReservation (String idReservation);
 
     Set<Reservation> findReservationsByEtudiantsIdEtudiant(long idEtudiant);
+    Set<Reservation> findReservationsByEtudiantsNomEt(String nomEt);
 }

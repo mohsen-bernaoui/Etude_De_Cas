@@ -31,4 +31,10 @@ public class ReservationServiceIMP implements IReservation{
     public Set<Reservation> findReservationsByEtudiantsIdEtudiant(long idEtudiant) {
         return reservationRepo.findReservationsByEtudiantsIdEtudiant(idEtudiant);
     }
+
+    @Override
+    public Set<Reservation> findReservationsByEtudiantsNomEt(String nomEt) {
+        return reservationRepo.findReservationsByEtudiantsNomEt(nomEt);
+    }
+
 }
