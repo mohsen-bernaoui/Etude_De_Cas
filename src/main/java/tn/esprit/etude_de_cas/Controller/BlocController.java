@@ -3,9 +3,11 @@ package tn.esprit.etude_de_cas.Controller;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.etude_de_cas.Entity.Bloc;
+import tn.esprit.etude_de_cas.Entity.TypeChambre;
 import tn.esprit.etude_de_cas.Service.IBloc;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @AllArgsConstructor
@@ -33,5 +35,10 @@ private IBloc iBloc;
     @DeleteMapping("/removeBloc/{idBloc}")
     public void removeBloc(@PathVariable long idBloc) {
         iBloc.removeBloc(idBloc);
+    }
+
+    @GetMapping("/findBlocByTypeC/{typC}")
+    public Set<Bloc> findBlocByTypeC(@PathVariable TypeChambre typC){
+        return iBloc.findBlocByChambresType(typC);
     }
 }
