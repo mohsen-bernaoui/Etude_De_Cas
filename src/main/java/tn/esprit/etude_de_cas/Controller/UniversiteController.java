@@ -17,17 +17,11 @@ public class UniversiteController {
     }
 
     @PostMapping("/addUniversite")
-    public University addUniversite(@RequestBody University university) {
-        return iUniversite.addUniversite(university);
-    }
+    public University addUniversite(@RequestBody University university) {return iUniversite.addUniversite(university);}
 
     @PutMapping("/updateUniversite")
-    public University updateUniversite(@RequestBody University university) {
-        return iUniversite.updateUniversite(university);
-    }
+    public University updateUniversite(@RequestBody University university) {return iUniversite.updateUniversite(university);}
 
     @GetMapping("/retrieveUniversite/{idUniversite}")
-    public University retrieveUniversite(@PathVariable long idUniversite) {
-        return iUniversite.retrieveUniversite(idUniversite);
-    }
+    public University retrieveUniversite(@PathVariable long idUniversite) {return iUniversite.retrieveUniversite(idUniversite);}
 }

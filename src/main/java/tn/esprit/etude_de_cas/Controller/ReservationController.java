@@ -17,12 +17,8 @@ public class ReservationController {
     }
 
     @PutMapping("/updateReservation")
-    public Reservation updateReservation(@RequestBody Reservation reservation) {
-        return iReservation.updateReservation(reservation);
-    }
+    public Reservation updateReservation(@RequestBody Reservation reservation) {return iReservation.updateReservation(reservation);}
 
    @GetMapping("/retrieveReservation/{idReservation}")
-    public Reservation retrieveReservation(@PathVariable String idReservation) {
-        return iReservation.retrieveReservation(idReservation);
-    }
+    public Reservation retrieveReservation(@PathVariable String idReservation) {return iReservation.retrieveReservation(idReservation);}
 }

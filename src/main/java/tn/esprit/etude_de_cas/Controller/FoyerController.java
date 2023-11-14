@@ -36,7 +36,5 @@ public class FoyerController {
     }
     @PostMapping("/affecter/{idFoyer}/{nomUniversite}")
     public ResponseEntity<String> affecterFoyerAUniversite(@PathVariable long idFoyer, @PathVariable String nomUniv) {
-        foyerServiceImp.affecterFoyerAUniversite(idFoyer, nomUniv);
-        return ResponseEntity.ok("Foyer affecté à l'université avec succès");
-    }
+        foyerServiceImp.affecterFoyerAUniversite(idFoyer, nomUniv);return ResponseEntity.ok("Foyer affecté à l'université avec succès");}
 }
