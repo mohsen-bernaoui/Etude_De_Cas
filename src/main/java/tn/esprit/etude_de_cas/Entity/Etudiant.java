@@ -26,4 +26,5 @@ public class Etudiant implements Serializable {
 
     @ManyToMany(mappedBy = "etudiants")
     private List<Reservation> reservations;
+    //baha
 }
