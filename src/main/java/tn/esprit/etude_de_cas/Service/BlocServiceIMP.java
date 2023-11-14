@@ -3,6 +3,7 @@ package tn.esprit.etude_de_cas.Service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.etude_de_cas.Entity.Bloc;
+import tn.esprit.etude_de_cas.Entity.Chambre;
 import tn.esprit.etude_de_cas.Entity.TypeChambre;
 import tn.esprit.etude_de_cas.Reposity.BlocRepo;
 
@@ -42,4 +43,6 @@ public class BlocServiceIMP implements IBloc{
     public Set<Bloc> findBlocByChambresType(TypeChambre typeC) {
         return blocRepo.findBlocByChambresTypeC(typeC);
     }
+
+
 }
