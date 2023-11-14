@@ -11,13 +11,13 @@ import java.util.List;
 @AllArgsConstructor
 public class ReservationController {
     private IReservation iReservation;
-    @PostMapping("/retrieveAllReservation")
+    @GetMapping("/retrieveAllReservation")
     public List<Reservation> retrieveAllReservation() {
         return iReservation.retrieveAllReservation();
     }
 
     @PutMapping("/updateReservation")
-    public Reservation updateReservation(Reservation reservation) {
+    public Reservation updateReservation(@RequestBody Reservation reservation) {
         return iReservation.updateReservation(reservation);
     }
 
