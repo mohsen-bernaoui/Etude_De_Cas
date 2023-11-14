@@ -22,6 +22,7 @@ public class Chambre implements Serializable {
     private TypeChambre typeC;
 
     @ManyToOne
+    @JsonIgnore
     private  Bloc bloc;
 
     @OneToMany
