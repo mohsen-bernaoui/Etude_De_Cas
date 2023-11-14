@@ -1,6 +1,7 @@
 package tn.esprit.etude_de_cas.Service;
 
 import tn.esprit.etude_de_cas.Entity.Bloc;
+import tn.esprit.etude_de_cas.Entity.Chambre;
 import tn.esprit.etude_de_cas.Entity.TypeChambre;
 
 
@@ -18,4 +19,6 @@ public interface IBloc {
 
     void removeBloc (long idBloc);
     Set<Bloc> findBlocByChambresType(TypeChambre typeC);
+
+
 }

@@ -3,6 +3,7 @@ package tn.esprit.etude_de_cas.Controller;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.etude_de_cas.Entity.Bloc;
+import tn.esprit.etude_de_cas.Entity.Chambre;
 import tn.esprit.etude_de_cas.Entity.TypeChambre;
 import tn.esprit.etude_de_cas.Service.IBloc;
 
@@ -41,4 +42,5 @@ private IBloc iBloc;
     public Set<Bloc> findBlocByTypeC(@PathVariable TypeChambre typC){
         return iBloc.findBlocByChambresType(typC);
     }
+
 }
