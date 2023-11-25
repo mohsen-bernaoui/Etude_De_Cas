@@ -23,6 +23,11 @@ public class ReservationServiceIMP implements IReservation{
     }
 
     @Override
+    public Reservation addReservation(Reservation reservation) {
+        return reservationRepo.save(reservation);
+    }
+
+    @Override
     public Reservation retrieveReservation(String idReservation) {
         return reservationRepo.findById(idReservation).orElse(null);
     }

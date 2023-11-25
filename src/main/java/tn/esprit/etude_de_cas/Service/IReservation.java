@@ -10,6 +10,8 @@ public interface IReservation {
 
     Reservation updateReservation (Reservation reservation);
 
+    Reservation addReservation(Reservation reservation);
+
     Reservation retrieveReservation (String idReservation);
 
     Set<Reservation> findReservationsByEtudiantsIdEtudiant(long idEtudiant);

@@ -37,4 +37,9 @@ public class ReservationController {
         return iReservation.findReservationsByEtudiantsNomStartsWithAB();
     }
 
+    @PostMapping("/addReservation")
+    public Reservation addReservation(@RequestBody Reservation reservation) {
+        return iReservation.addReservation(reservation);
+    }
+
 }
