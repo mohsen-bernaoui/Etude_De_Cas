@@ -1,5 +1,6 @@
 package tn.esprit.etude_de_cas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
+
 public class Etudiant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +26,9 @@ public class Etudiant implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataNaissance;
 
+
     @ManyToMany(mappedBy = "etudiants")
+    @JsonIgnore
     private List<Reservation> reservations;
     //baha
 }
