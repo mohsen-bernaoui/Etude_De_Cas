@@ -35,4 +35,9 @@ public class ChambreServiceIMP implements IChambre{
     public Set<Chambre> findChambresByBlocIdBloc(Long idBloc) {
         return chambreRepo.findChambresByBlocIdBloc(idBloc);
     }
+
+    @Override
+    public void deleteChambre(long idChambre) {
+        chambreRepo.deleteById(idChambre);
+    }
 }

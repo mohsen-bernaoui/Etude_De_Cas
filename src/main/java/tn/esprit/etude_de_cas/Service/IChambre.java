@@ -15,4 +15,6 @@ public interface IChambre {
 
     Chambre retrieveChambre (long idChambre);
     Set<Chambre> findChambresByBlocIdBloc(Long idBloc);
+
+    void deleteChambre(long idChambre);
 }
