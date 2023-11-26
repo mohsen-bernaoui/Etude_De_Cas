@@ -47,4 +47,9 @@ public class ReservationServiceIMP implements IReservation{
         return reservationRepo.findReservationsByEtudiantsNomStartsWithAB();
     }
 
+    @Override
+    public void deleteReservation(String ID_reservation) {
+        reservationRepo.deleteById(ID_reservation);
+    }
+
 }
