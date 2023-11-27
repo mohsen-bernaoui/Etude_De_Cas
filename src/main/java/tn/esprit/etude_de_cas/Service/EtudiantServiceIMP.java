@@ -2,7 +2,7 @@ package tn.esprit.etude_de_cas.Service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import tn.esprit.etude_de_cas.Entity.Etudiant;
+import tn.esprit.etude_de_cas.Entity.User;
 import tn.esprit.etude_de_cas.Reposity.EtudtiantRepo;
 
 import java.util.List;
@@ -12,22 +12,22 @@ public class EtudiantServiceIMP implements IEtudiant {
     private EtudtiantRepo etudtiantRepo;
 
     @Override
-    public Etudiant addEtudiant(Etudiant e) {
+    public User addEtudiant(User e) {
         return etudtiantRepo.save(e);
     }
 
     @Override
-    public Etudiant updateEtudiant(Etudiant e) {
+    public User updateEtudiant(User e) {
         return etudtiantRepo.save(e);
     }
 
     @Override
-    public List<Etudiant> findallEtudiant() {
+    public List<User> findallEtudiant() {
         return etudtiantRepo.findAll();
     }
 
     @Override
-    public Etudiant findById(long idE) {
+    public User findById(long idE) {
         return etudtiantRepo.findById(idE).orElse(null);
     }
 

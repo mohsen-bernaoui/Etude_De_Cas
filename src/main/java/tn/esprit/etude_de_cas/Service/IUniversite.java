@@ -12,4 +12,6 @@ public interface IUniversite {
     University updateUniversite (University university);
 
     University retrieveUniversite (long idUniversite);
+
+
 }

@@ -49,7 +49,27 @@ public class FoyerServiceIMP implements IFoyer{
         if (universite == null) {
             throw new RuntimeException("Université non trouvée");
         }
+
+        foyer.setUniversite(universite);
+        universite.setFoyer(foyer);
+
+        foyerRepository.save(foyer);
+        universityRepo.save(universite);
+
+        return foyer;
+    }
+    }
+
+    /*@Override
+    public Foyer affecterFoyerAUniversite(long idFoyer, String nomUniv) {
+        Foyer foyer = foyerRepository.findById(idFoyer)
+                .orElseThrow(() -> new RuntimeException("Foyer non trouvé"));
+
+        University universite = universityRepo.findByNomUniversity(nomUniv);
+        if (universite == null) {
+            throw new RuntimeException("Université non trouvée");
+        }
         foyer.setUniversite(universite);
         return foyerRepository.save(foyer);
-    }
-}
+    }*/
+

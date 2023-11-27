@@ -29,12 +29,12 @@ public class ReservationServiceIMP implements IReservation{
 
     @Override
     public Set<Reservation> findReservationsByEtudiantsIdEtudiant(long idEtudiant) {
-        return reservationRepo.findReservationsByEtudiantsIdEtudiant(idEtudiant);
+        return reservationRepo.findReservationsByEtudiantsId(idEtudiant);
     }
 
     @Override
     public Set<Reservation> findReservationsByEtudiantsNomEt(String nomEt) {
-        return reservationRepo.findReservationsByEtudiantsNomEt(nomEt);
+        return reservationRepo.findReservationsByEtudiantsName(nomEt);
     }
 
     @Override

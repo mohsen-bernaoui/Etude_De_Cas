@@ -11,4 +11,6 @@ public interface IFoyer {
     public Foyer findById(long idF);
     public void deleteFoyer(long idF);
     public Foyer affecterFoyerAUniversite(long idFoyer, String nomUniv);
+
+
 }

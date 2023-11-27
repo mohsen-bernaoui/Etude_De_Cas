@@ -11,9 +11,9 @@ import java.util.Set;
 
 @Repository
 public interface ReservationRepo extends JpaRepository<Reservation,String> {
-    Set<Reservation> findReservationsByEtudiantsIdEtudiant(long idEtudiant);
-    Set<Reservation> findReservationsByEtudiantsNomEt(String nomEt);
+    Set<Reservation> findReservationsByEtudiantsId(long idEtudiant);
+    Set<Reservation> findReservationsByEtudiantsName(String nomEt);
 
-    @Query("SELECT r FROM Reservation r JOIN r.etudiants e WHERE e.nomEt LIKE 'AB%'")
+    @Query("SELECT r FROM Reservation r JOIN r.etudiants e WHERE e.name LIKE 'AB%'")
     Set<Reservation> findReservationsByEtudiantsNomStartsWithAB();
 }
