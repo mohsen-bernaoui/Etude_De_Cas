@@ -52,4 +52,18 @@ public class FoyerServiceIMP implements IFoyer{
         foyer.setUniversite(universite);
         return foyerRepository.save(foyer);
     }
+
+    @Override
+    public Foyer getFoyerIdFromUniversityTable(long idUniversite) {
+        return foyerRepository.getFoyerIdFromUniversityTable(idUniversite);
+    }
+
+    @Override
+    public List<Foyer> getFoyersWithCapacity(String universiteNom, int minCapacity) {
+        University universite = universityRepo.findByNomUniversity(universiteNom);
+        if (universite == null) {
+            throw new RuntimeException("Université non trouvée");
+        }
+        return foyerRepository.findFoyerWithCapacity(universite, minCapacity);
+    }
 }

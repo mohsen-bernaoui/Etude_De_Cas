@@ -11,4 +11,6 @@ public interface IFoyer {
     public Foyer findById(long idF);
     public void deleteFoyer(long idF);
     public Foyer affecterFoyerAUniversite(long idFoyer, String nomUniv);
+    public Foyer getFoyerIdFromUniversityTable(long idUniversite);
+    public List<Foyer> getFoyersWithCapacity(String universiteNom, int minCapacity);
 }

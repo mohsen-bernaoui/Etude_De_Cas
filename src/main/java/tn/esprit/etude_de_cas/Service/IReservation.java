@@ -20,4 +20,5 @@ public interface IReservation {
     Set<Reservation> findReservationsByEtudiantsNomStartsWithAB();
 
     void deleteReservation( String ID_reservation);
+    Reservation affecterReservationAEtudiant(String idReservation, long idEtudiant);
 }

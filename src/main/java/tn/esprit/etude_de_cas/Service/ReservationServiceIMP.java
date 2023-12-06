@@ -2,8 +2,8 @@ package tn.esprit.etude_de_cas.Service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import tn.esprit.etude_de_cas.Entity.Reservation;
-import tn.esprit.etude_de_cas.Reposity.ReservationRepo;
+import tn.esprit.etude_de_cas.Entity.*;
+import tn.esprit.etude_de_cas.Reposity.*;
 
 import java.util.List;
 import java.util.Set;
@@ -12,6 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class ReservationServiceIMP implements IReservation{
     private ReservationRepo reservationRepo;
+    private EtudtiantRepo etudtiantRepo;
     @Override
     public List<Reservation> retrieveAllReservation() {
         return reservationRepo.findAll();
@@ -50,6 +51,19 @@ public class ReservationServiceIMP implements IReservation{
     @Override
     public void deleteReservation(String ID_reservation) {
         reservationRepo.deleteById(ID_reservation);
+    }
+
+    @Override
+    public Reservation affecterReservationAEtudiant(String idReservation,long idEtudiant) {
+        Reservation reservation = reservationRepo.findById(idReservation)
+                .orElseThrow(() -> new RuntimeException("Reservation non trouvée"));
+
+        List<Etudiant>etudiant = etudtiantRepo.findByIdEtudiant(idEtudiant);
+        if (etudiant == null) {
+            throw new RuntimeException("Etudiant non trouvé");
+        }
+        reservation.setEtudiants(etudiant);
+        return reservationRepo.save(reservation);
     }
 
 }

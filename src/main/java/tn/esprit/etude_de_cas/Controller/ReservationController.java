@@ -46,4 +46,8 @@ public class ReservationController {
     public void deleteReservation(@PathVariable String ID_reservation) {
         iReservation.deleteReservation(ID_reservation);
     }
+    @PostMapping("/affecterReservationAEtudiant/{idReservation}/{idEtudiant}")
+    public Reservation affecterReservationAEtudiant(@PathVariable String idReservation, @PathVariable long idEtudiant) {
+        return iReservation.affecterReservationAEtudiant(idReservation, idEtudiant);
+    }
 }

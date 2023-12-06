@@ -2,7 +2,7 @@ package tn.esprit.etude_de_cas.Controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.etude_de_cas.Entity.Foyer;
 import tn.esprit.etude_de_cas.Service.FoyerServiceIMP;
@@ -34,7 +34,17 @@ public class FoyerController {
     public void deleteFoyer(@PathVariable long idF){
         foyerServiceImp.deleteFoyer(idF);
     }
-    @PostMapping("/affecter/{idFoyer}/{nomUniversite}")
-    public ResponseEntity<String> affecterFoyerAUniversite(@PathVariable long idFoyer, @PathVariable String nomUniv) {
-        foyerServiceImp.affecterFoyerAUniversite(idFoyer, nomUniv);return ResponseEntity.ok("Foyer affecté à l'université avec succès");}
+    @PostMapping("/affecter/{idFoyer}/{nomUniv}")
+    public Foyer affecterFoyerAUniversite(@PathVariable long idFoyer, @PathVariable String nomUniv) {
+
+        return foyerServiceImp.affecterFoyerAUniversite(idFoyer, nomUniv);
+    }
+    @GetMapping("/getFoyer/{idUniversite}")
+    public Foyer getFoyerIdFromUniversityTable(@PathVariable long idUniversite) {
+        return foyerServiceImp.getFoyerIdFromUniversityTable(idUniversite);
+    }
+    @GetMapping("/getFoyersWithCapacity/{universiteNom}/{minCapacity}")
+    public List<Foyer> getFoyersWithCapacity(@PathVariable String universiteNom, @PathVariable int minCapacity) {
+        return foyerServiceImp.getFoyersWithCapacity(universiteNom, minCapacity);
+    }
 }
