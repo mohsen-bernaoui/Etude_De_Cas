@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
-public class Bloc implements Serializable {
+public class  Bloc implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idBloc;

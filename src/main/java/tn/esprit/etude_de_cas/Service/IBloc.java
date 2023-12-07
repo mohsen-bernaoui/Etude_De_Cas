@@ -8,7 +8,7 @@ import java.util.List;
 public interface IBloc {
     List<Bloc> retrieveBlocs();
 
-    Bloc updateBloc (Bloc bloc);
+    Bloc updateBloc(Bloc bloc, long idBloc);
 
     Bloc addBloc (Bloc bloc);
 

@@ -1,6 +1,7 @@
 package tn.esprit.etude_de_cas.Service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tn.esprit.etude_de_cas.Entity.Bloc;
 import tn.esprit.etude_de_cas.Reposity.BlocRepo;
@@ -17,8 +18,16 @@ public class BlocServiceIMP implements IBloc{
     }
 
     @Override
-    public Bloc updateBloc(Bloc bloc) {
-        return blocRepo.save(bloc);
+    public Bloc updateBloc(Bloc bloc, long idBloc) {
+
+        Bloc existingBloc = blocRepo.findById(idBloc).orElse(null);
+        if (existingBloc != null) {
+            existingBloc.setNomBloc(bloc.getNomBloc());
+            existingBloc.setCapaciteBloc(bloc.getCapaciteBloc());
+            return blocRepo.save(existingBloc);
+        } else {
+            return null;
+        }
     }
 
     @Override
