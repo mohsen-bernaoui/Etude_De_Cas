@@ -1,6 +1,8 @@
 package tn.esprit.etude_de_cas.Controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,8 +11,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.etude_de_cas.Entity.AuthRequest;
 import tn.esprit.etude_de_cas.Entity.User;
+import tn.esprit.etude_de_cas.Reposity.UserInfoRepository;
 import tn.esprit.etude_de_cas.Service.JwtService;
 import tn.esprit.etude_de_cas.Service.UserInfoService;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -21,10 +28,9 @@ public class UserController {
 
 
     private UserInfoService service;
-
+     private UserInfoRepository userInfoRepository;
 
     private JwtService jwtService;
-
 
     private AuthenticationManager authenticationManager;
 
@@ -38,8 +44,11 @@ public class UserController {
         return service.addUser(userInfo);
     }
 
+    @PutMapping("/editUser")
+    public String editUser(@RequestBody User userInfo) { return service.editUser(userInfo);}
+
+
     @GetMapping("/user/userProfile")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public String userProfile() {
         return "Welcome to User Profile";
     }
@@ -53,7 +62,7 @@ public class UserController {
 
 
    @PostMapping("/generateToken")
-   public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+   public Map<String, Object> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
        // Log received credentials
        System.out.println("Received credentials - Username: " + authRequest.getName() + ", Password: " + authRequest.getPassword());
 
@@ -62,11 +71,27 @@ public class UserController {
 
        // Log authentication details
        System.out.println("Authentication details: " + authentication);
-
        if (authentication.isAuthenticated()) {
-           return jwtService.generateToken(authRequest.getName());
+           Optional<User> user = userInfoRepository.findByName(authRequest.getName());
+           Map<String, Object> response = new HashMap<>();
+           String token = Long.toString(user.get().getCin());
+           response.put("token", jwtService.generateToken(
+                   Integer.toString(user.get().getId())
+                           +'|'+Long.toString( user.get().getCin())
+                           +'|'+authRequest.getName()
+                           +'|'+user.get().getPrenomEt()
+                           +'|'+user.get().getEmail()
+                           +'|'+user.get().getDataNaissance()
+                           +'|'+user.get().getEcole()
+                           +'|'+user.get().getRoles()
+           ));
+           response.put("role", user.get().getRoles());
+
+           return response;
        } else {
-           throw new UsernameNotFoundException("Invalid user request!");
+           Map<String, Object> response = new HashMap<>();
+           response.put("message", "error");
+           return response;
        }
    }
 

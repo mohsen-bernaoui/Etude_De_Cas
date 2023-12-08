@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 public class ReservationController {
     private IReservation iReservation;
@@ -37,4 +38,16 @@ public class ReservationController {
         return iReservation.findReservationsByEtudiantsNomStartsWithAB();
     }
 
+    @PostMapping("/addReservation")
+    public Reservation addReservation(@RequestBody Reservation reservation) {
+        return iReservation.addReservation(reservation);
+    }
+    @DeleteMapping("/deleteReservation/{ID_reservation}")
+    public void deleteReservation(@PathVariable String ID_reservation) {
+        iReservation.deleteReservation(ID_reservation);
+    }
+    @PostMapping("/affecterReservationAEtudiant/{idReservation}/{idEtudiant}")
+    public Reservation affecterReservationAEtudiant(@PathVariable String idReservation, @PathVariable long idEtudiant) {
+        return iReservation.affecterReservationAEtudiant(idReservation, idEtudiant);
+    }
 }

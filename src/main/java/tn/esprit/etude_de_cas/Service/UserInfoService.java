@@ -25,6 +25,10 @@ public class UserInfoService implements UserDetailsService {
     @Lazy
     private PasswordEncoder encoder;
 
+    public UserInfoService() {
+
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -41,5 +45,8 @@ public class UserInfoService implements UserDetailsService {
         return "User Added Successfully";
     }
 
-
+    public String editUser(User userInfo){
+        repository.updateUser(userInfo);
+        return "User Updated";
+    }
 }
