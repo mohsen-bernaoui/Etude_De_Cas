@@ -15,4 +15,8 @@ public interface IBloc {
     Bloc retrieveBloc (long idBloc);
 
     void removeBloc (long idBloc);
+    void reserverChambreAvecMiseAJourCapacite(long idBloc, long idChambre, long idEtudiant);
+    public List<Object[]> trouverBlocsAvecNombreReservations();
+    List<Object[]> countEtudiantsUniquesParBloc();
+
 }

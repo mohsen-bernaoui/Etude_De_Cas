@@ -45,4 +45,13 @@ private IBloc iBloc;
         iBloc.removeBloc(idBloc);
     }
 
+    @GetMapping("trouverBlocsAvecNombreReservations")
+    public List<Object[]> trouverBlocsAvecNombreReservations() {
+        return iBloc.trouverBlocsAvecNombreReservations();
+    }
+
+    @GetMapping("countEtudiantsUniquesParBloc")
+    public List<Object[]> countEtudiantsUniquesParBloc() {
+        return iBloc.countEtudiantsUniquesParBloc();
+    }
 }
