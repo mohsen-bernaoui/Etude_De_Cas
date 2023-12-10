@@ -42,4 +42,10 @@ public class ReservationServiceIMP implements IReservation{
         return reservationRepo.findReservationsByEtudiantsNomStartsWithAB();
     }
 
+    @Override
+    public Reservation addReservation(Reservation reservation) {
+
+        return reservationRepo.save(reservation);
+    }
+
 }

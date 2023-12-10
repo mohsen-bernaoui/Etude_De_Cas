@@ -10,6 +10,7 @@ import java.util.Set;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class ReservationController {
     private IReservation iReservation;
     @GetMapping("/retrieveAllReservation")
@@ -35,6 +36,11 @@ public class ReservationController {
   @GetMapping("/findReservationsByEtudiantsNomStartsWithAB")
     public Set<Reservation> findReservationsByEtudiantsNomStartsWithAB() {
         return iReservation.findReservationsByEtudiantsNomStartsWithAB();
+    }
+
+    @PostMapping("/addReservation")
+    public Reservation addReservation(@RequestBody Reservation reservation) {
+        return iReservation.addReservation(reservation);
     }
 
 }
