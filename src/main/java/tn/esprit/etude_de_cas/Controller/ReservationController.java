@@ -43,4 +43,9 @@ public class ReservationController {
         return iReservation.addReservation(reservation);
     }
 
+    @DeleteMapping("/deleteReservation/{idReservation}")
+    public Reservation deleteReservation(@PathVariable String idReservation) {
+        return iReservation.deleteReservation(idReservation);
+    }
+
 }

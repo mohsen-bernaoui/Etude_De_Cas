@@ -48,4 +48,15 @@ public class ReservationServiceIMP implements IReservation{
         return reservationRepo.save(reservation);
     }
 
+    @Override
+    public Reservation deleteReservation(String idReservation) {
+
+        Reservation reservation1 = reservationRepo.findById(idReservation).orElse(null);
+        if (reservation1 == null) {
+            return null;
+        }
+        reservationRepo.deleteById(idReservation);
+        return reservation1;
+    }
+
 }
