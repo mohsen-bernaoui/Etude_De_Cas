@@ -47,4 +47,13 @@ private IBloc iBloc;
     public Bloc findBlocByChambres(@PathVariable long idChambre){
         return iBloc.findBlocByChambresIdChambre(idChambre);
     }
+    @GetMapping("/trouverNombreReservationsParBloc/{idBloc}")
+    public int trouverNombreReservationsParBloc(@PathVariable long idBloc) {
+        return iBloc.trouverNombreReservationsParBloc(idBloc);
+    }
+    @GetMapping("/countEtudiantsUniquesParBloc/{idBloc}")
+    public int countEtudiantsUniquesParBloc(@PathVariable long idBloc) {
+        return iBloc.countEtudiantsUniquesParBloc(idBloc);
+    }
+
 }
