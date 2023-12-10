@@ -48,6 +48,14 @@ public class BlocServiceIMP implements IBloc{
     public Bloc findBlocByChambresIdChambre(long idChambre) {
         return blocRepo.findBlocByChambresIdChambre(idChambre);
     }
+    @Override
+    public int trouverNombreReservationsParBloc(long idBloc) {
+        return blocRepo.trouverNombreReservationsParBloc(idBloc);
+    }
+    @Override
+    public int countEtudiantsUniquesParBloc(long idBloc) {
+        return blocRepo.countEtudiantsUniquesParBloc(idBloc);
+    }
 
 
 }

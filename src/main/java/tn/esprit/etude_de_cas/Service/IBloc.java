@@ -1,5 +1,6 @@
 package tn.esprit.etude_de_cas.Service;
 
+import org.springframework.data.repository.query.Param;
 import tn.esprit.etude_de_cas.Entity.Bloc;
 import tn.esprit.etude_de_cas.Entity.Chambre;
 import tn.esprit.etude_de_cas.Entity.TypeChambre;
@@ -21,4 +22,6 @@ public interface IBloc {
     Set<Bloc> findBlocByChambresType(TypeChambre typeC);
 
     Bloc findBlocByChambresIdChambre(long idChambre);
+    int trouverNombreReservationsParBloc(@Param("idBloc") long idBloc);
+    int countEtudiantsUniquesParBloc(@Param("idBloc") long idBloc);
 }
