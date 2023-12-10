@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.etude_de_cas.Entity.Bloc;
 import tn.esprit.etude_de_cas.Entity.Chambre;
-import tn.esprit.etude_de_cas.Entity.Foyer;
 import tn.esprit.etude_de_cas.Entity.TypeChambre;
 import tn.esprit.etude_de_cas.Reposity.BlocRepo;
-import tn.esprit.etude_de_cas.Reposity.FoyerRepo;
 
 import java.util.List;
 import java.util.Set;
@@ -16,7 +14,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class BlocServiceIMP implements IBloc{
     private BlocRepo blocRepo;
-    private FoyerRepo foyerRepo;
     @Override
     public List<Bloc> retrieveBlocs() {
         return blocRepo.findAll();
@@ -52,20 +49,5 @@ public class BlocServiceIMP implements IBloc{
         return blocRepo.findBlocByChambresIdChambre(idChambre);
     }
 
-    @Override
-    public Bloc affecterFoyerABloc(long idFoyer, long idBloc) {
 
-        Bloc bloc = blocRepo.findById(idBloc).orElse(null);
-        if (bloc == null) {
-            throw new RuntimeException("Bloc non trouvé");
-        }
-        Foyer foyer =foyerRepo.findByIdfFoyer(idFoyer);
-        bloc.setFoyer(foyer);
-        return blocRepo.save(bloc);
-    }
-
-    @Override
-    public List<Bloc> findByFoyerIdfFoyer(long idFoyer) {
-            return blocRepo.findByFoyerIdfFoyer(idFoyer);
-        }
-    }
+}

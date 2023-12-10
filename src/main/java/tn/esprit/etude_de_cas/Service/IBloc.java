@@ -21,6 +21,4 @@ public interface IBloc {
     Set<Bloc> findBlocByChambresType(TypeChambre typeC);
 
     Bloc findBlocByChambresIdChambre(long idChambre);
-    Bloc affecterFoyerABloc(long idFoyer, long idBloc);
-    List<Bloc> findByFoyerIdfFoyer(long idFoyer);
 }
