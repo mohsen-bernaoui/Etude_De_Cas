@@ -10,17 +10,17 @@ import java.util.List;
 
 @Repository
 public interface BlocRepo extends JpaRepository<Bloc,Long> {
-    @Query("SELECT b.nomBloc, COUNT(r) " +
+    @Query("SELECT COUNT(r) " +
             "FROM Bloc b " +
             "LEFT JOIN b.chambres c " +
             "LEFT JOIN c.reservations r " +
-            "GROUP BY b.idBloc")
-    List<Object[]> trouverBlocsAvecNombreReservations();
-    @Query("SELECT b.nomBloc, COUNT(DISTINCT e.idEtudiant) " +
+            "WHERE b.idBloc = :idBloc")
+    int trouverNombreReservationsParBloc(@Param("idBloc") long idBloc);
+    @Query("SELECT COUNT(DISTINCT e.idEtudiant) " +
             "FROM Bloc b " +
             "LEFT JOIN b.chambres c " +
             "LEFT JOIN c.reservations r " +
             "LEFT JOIN r.etudiants e " +
-            "GROUP BY b.idBloc")
-    List<Object[]> countEtudiantsUniquesParBloc();
+            "WHERE b.idBloc = :idBloc")
+    int countEtudiantsUniquesParBloc(@Param("idBloc") long idBloc);
 }

@@ -1,13 +1,8 @@
 package tn.esprit.etude_de_cas.Service;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tn.esprit.etude_de_cas.Entity.Bloc;
-import tn.esprit.etude_de_cas.Entity.Chambre;
-import tn.esprit.etude_de_cas.Entity.Etudiant;
-import tn.esprit.etude_de_cas.Entity.Reservation;
 import tn.esprit.etude_de_cas.Reposity.BlocRepo;
 import tn.esprit.etude_de_cas.Reposity.ChambreRepo;
 import tn.esprit.etude_de_cas.Reposity.EtudtiantRepo;
@@ -57,13 +52,15 @@ public class BlocServiceIMP implements IBloc{
     public void reserverChambreAvecMiseAJourCapacite(long idBloc, long idChambre, long idEtudiant) {
 
     }
-    public List<Object[]> trouverBlocsAvecNombreReservations() {
-        return blocRepo.trouverBlocsAvecNombreReservations();
+    @Override
+    public int trouverNombreReservationsParBloc(long idBloc) {
+        return blocRepo.trouverNombreReservationsParBloc(idBloc);
     }
 
     @Override
-    public List<Object[]> countEtudiantsUniquesParBloc() {
-        return blocRepo.countEtudiantsUniquesParBloc();
+    public int countEtudiantsUniquesParBloc(long idBloc) {
+        return blocRepo.countEtudiantsUniquesParBloc(idBloc);
     }
+
 
 }

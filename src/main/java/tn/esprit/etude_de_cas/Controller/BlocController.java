@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class BlocController {
 private IBloc iBloc;
 
@@ -45,13 +46,13 @@ private IBloc iBloc;
         iBloc.removeBloc(idBloc);
     }
 
-    @GetMapping("trouverBlocsAvecNombreReservations")
-    public List<Object[]> trouverBlocsAvecNombreReservations() {
-        return iBloc.trouverBlocsAvecNombreReservations();
+    @GetMapping("trouverNombreReservationsParBloc/{idBloc}")
+    public int trouverNombreReservationsParBloc(@PathVariable long idBloc) {
+        return iBloc.trouverNombreReservationsParBloc(idBloc);
     }
 
-    @GetMapping("countEtudiantsUniquesParBloc")
-    public List<Object[]> countEtudiantsUniquesParBloc() {
-        return iBloc.countEtudiantsUniquesParBloc();
+    @GetMapping("/countEtudiantsUniquesParBloc/{idBloc}")
+    public int countEtudiantsUniquesParBloc(@PathVariable long idBloc) {
+        return iBloc.countEtudiantsUniquesParBloc(idBloc);
     }
 }
