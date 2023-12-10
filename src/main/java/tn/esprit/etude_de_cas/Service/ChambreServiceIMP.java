@@ -1,10 +1,10 @@
 package tn.esprit.etude_de_cas.Service;
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.etude_de_cas.Entity.Chambre;
 import tn.esprit.etude_de_cas.Reposity.ChambreRepo;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -19,6 +19,7 @@ public class ChambreServiceIMP implements IChambre{
 
     @Override
     public Chambre addChambre(Chambre chambre) {
+        chambre.setLastCleaningDate(LocalDateTime.now());
         return chambreRepo.save(chambre);
     }
 
