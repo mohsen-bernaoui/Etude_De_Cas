@@ -5,5 +5,8 @@ import org.springframework.stereotype.Repository;
 import tn.esprit.etude_de_cas.Entity.User;
 
 @Repository
-public interface EtudtiantRepo extends JpaRepository<User,Long> {
+public interface UserRepo extends JpaRepository<User,Integer> {
+    User findByEmail(String email);
+
+    User findByName(String name);
 }

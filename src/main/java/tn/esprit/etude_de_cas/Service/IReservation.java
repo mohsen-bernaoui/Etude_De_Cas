@@ -10,15 +10,10 @@ public interface IReservation {
 
     Reservation updateReservation (Reservation reservation);
 
-    Reservation addReservation(Reservation reservation);
-
     Reservation retrieveReservation (String idReservation);
 
     Set<Reservation> findReservationsByEtudiantsIdEtudiant(long idEtudiant);
     Set<Reservation> findReservationsByEtudiantsNomEt(String nomEt);
 
     Set<Reservation> findReservationsByEtudiantsNomStartsWithAB();
-
-    void deleteReservation( String ID_reservation);
-    Reservation affecterReservationAEtudiant(String idReservation, long idEtudiant);
 }
