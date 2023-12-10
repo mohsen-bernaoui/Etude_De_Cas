@@ -36,7 +36,10 @@ public class UniversiteServiceIMP implements IUniversite{
         return universityRepo.findById(idUniversite).orElse(null);
     }
 
-
+    @Override
+    public void deleteUniversite(long iduniveriste) {
+        universityRepo.deleteById(iduniveriste);
+    }
 
 
 }

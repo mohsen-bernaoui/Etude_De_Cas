@@ -25,4 +25,9 @@ public class UniversiteController {
 
     @GetMapping("/retrieveUniversite/{idUniversite}")
     public University retrieveUniversite(@PathVariable long idUniversite) {return iUniversite.retrieveUniversite(idUniversite);}
+
+    @DeleteMapping("/deleteuniversite/{iduniveriste}")
+    public void deleteUniversite(@PathVariable long iduniveriste) {
+        iUniversite.deleteUniversite(iduniveriste);
+    }
 }
