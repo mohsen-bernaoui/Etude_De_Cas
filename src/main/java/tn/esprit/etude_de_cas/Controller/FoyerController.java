@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class FoyerController {
     @Autowired
     private FoyerServiceIMP foyerServiceImp;
@@ -26,7 +27,7 @@ public class FoyerController {
     public List<Foyer> findAllFoyer(){
         return foyerServiceImp.findallFoyer();
     }
-    @GetMapping("/getFoyer/{idF}")
+        @GetMapping("/getFoyer/{idF}")
     public Foyer findById(@PathVariable long idF){
         return foyerServiceImp.findById(idF);
     }
@@ -43,8 +44,8 @@ public class FoyerController {
     public Foyer getFoyerIdFromUniversityTable(@PathVariable long idUniversite) {
         return foyerServiceImp.getFoyerIdFromUniversityTable(idUniversite);
     }
-    @GetMapping("/getFoyersWithCapacity/{universiteNom}/{minCapacity}")
-    public List<Foyer> getFoyersWithCapacity(@PathVariable String universiteNom, @PathVariable int minCapacity) {
-        return foyerServiceImp.getFoyersWithCapacity(universiteNom, minCapacity);
+    @GetMapping("/getFoyersWithCapacity/{universiteNom}")
+    public List<Foyer> getFoyersWithCapacity(@PathVariable String universiteNom) {
+        return foyerServiceImp.getFoyersWithCapacity(universiteNom);
     }
 }

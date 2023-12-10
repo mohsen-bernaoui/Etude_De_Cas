@@ -73,13 +73,18 @@ public class ChambreServiceIMP implements IChambre{
     }
 
     @Override
-    public List<Chambre> findByBloc_IdBlocAndTypeC(Long idBloc, TypeChambre typeC) {
-        return chambreRepo.findByBloc_IdBlocAndTypeC(idBloc, typeC);
+    public List<Chambre> findByBloc_IdBlocAndTypeC(Long idBloc) {
+        return chambreRepo.findByBloc_IdBlocAndTypeC(idBloc);
     }
 
     @Override
     public List<Chambre> findByTypeCWhereAndCapacityChambreGreaterThanZero(TypeChambre typeChambre) {
         return chambreRepo.findByTypeCWhereAndCapacityChambreGreaterThanZero(typeChambre);
+    }
+
+    @Override
+    public List<TypeChambre> gettypechambre() {
+        return chambreRepo.getAllByTypeC();
     }
 
 }

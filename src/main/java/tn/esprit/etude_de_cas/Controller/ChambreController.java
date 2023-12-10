@@ -47,13 +47,17 @@ public class ChambreController {
     public Chambre affecterChambreAreservation(@PathVariable long idChambre, @PathVariable String idReservation) {
         return iChambre.affecterChambreAreservation(idChambre, idReservation);
     }
-    @GetMapping("/findByBloc_IdBlocAndTypeC/{idBloc}/{typeC}")
-    public List<Chambre> findByBloc_IdBlocAndTypeC(@PathVariable Long idBloc, @PathVariable TypeChambre typeC) {
-        return iChambre.findByBloc_IdBlocAndTypeC(idBloc, typeC);
+    @GetMapping("/findByBloc_IdBlocAndTypeC/{idBloc}")
+    public List<Chambre> findByBloc_IdBlocAndTypeC(@PathVariable Long idBloc) {
+        return iChambre.findByBloc_IdBlocAndTypeC(idBloc);
     }
 
     @GetMapping("/findByTypeCWhereAndCapacityChambreGreaterThanZero/{typeChambre}")
     public List<Chambre> findByTypeCWhereAndCapacityChambreGreaterThanZero(@PathVariable TypeChambre typeChambre) {
         return iChambre.findByTypeCWhereAndCapacityChambreGreaterThanZero(typeChambre);
+    }
+    @GetMapping("/gettypechambre")
+    public List<TypeChambre> gettypechambre() {
+        return iChambre.gettypechambre();
     }
 }

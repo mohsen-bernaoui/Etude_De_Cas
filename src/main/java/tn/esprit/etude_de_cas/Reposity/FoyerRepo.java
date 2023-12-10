@@ -15,8 +15,8 @@ public interface FoyerRepo extends JpaRepository<Foyer,Long> {
     Foyer getFoyerIdFromUniversityTable(@Param("idUniversite ") Long idUniversite);
     Foyer findByIdfFoyer(long idFoyer);
     Foyer findByUniversiteNomUniversity(String nomUni);
-    @Query("SELECT f FROM Foyer f WHERE f.universite=:universite AND f.capaciteFoyer>=:capacity")
-    List<Foyer> findFoyerWithCapacity(@Param("universite") University universite,@Param("capacity") int minCapacity);
+    @Query("SELECT f FROM Foyer f WHERE f.universite=:universite AND f.capaciteFoyer > 0")
+    List<Foyer> findFoyerWithCapacity(@Param("universite") University universite);
 
 
 }

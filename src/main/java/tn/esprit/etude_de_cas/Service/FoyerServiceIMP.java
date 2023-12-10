@@ -32,6 +32,13 @@ public class FoyerServiceIMP implements IFoyer{
 
     @Override
     public Foyer findById(long idF) {
+        Foyer foyer = foyerRepository.findById(idF).orElse(null);
+        if (foyer == null) {
+            throw new RuntimeException("Foyer non trouvé");
+        }
+        if (foyer.getCapaciteFoyer() == 0) {
+            return null;
+        }
         return foyerRepository.findById(idF).orElse(null);
     }
 
@@ -59,11 +66,11 @@ public class FoyerServiceIMP implements IFoyer{
     }
 
     @Override
-    public List<Foyer> getFoyersWithCapacity(String universiteNom, int minCapacity) {
+    public List<Foyer> getFoyersWithCapacity(String universiteNom) {
         University universite = universityRepo.findByNomUniversity(universiteNom);
         if (universite == null) {
             throw new RuntimeException("Université non trouvée");
         }
-        return foyerRepository.findFoyerWithCapacity(universite, minCapacity);
+        return foyerRepository.findFoyerWithCapacity(universite);
     }
 }

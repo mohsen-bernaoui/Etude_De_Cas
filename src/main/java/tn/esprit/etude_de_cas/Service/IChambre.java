@@ -21,6 +21,7 @@ public interface IChambre {
 
     Chambre affecterChambreABloc(long idChambre, long idBloc, String idReservation);
     Chambre affecterChambreAreservation(long idChambre, String idReservation);
-    List<Chambre> findByBloc_IdBlocAndTypeC(Long idBloc, TypeChambre typeC);
+    List<Chambre> findByBloc_IdBlocAndTypeC(Long idBloc);
     List<Chambre> findByTypeCWhereAndCapacityChambreGreaterThanZero(TypeChambre typeChambre);
+    List<TypeChambre> gettypechambre();
 }

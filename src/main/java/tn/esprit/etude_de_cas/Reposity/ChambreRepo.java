@@ -13,9 +13,11 @@ import java.util.Set;
 @Repository
 public interface ChambreRepo extends JpaRepository<Chambre,Long> {
     Set<Chambre> findChambresByBlocIdBloc(Long idBloc);
-    @Query("SELECT c FROM Chambre c WHERE c.bloc.idBloc = :idBloc AND c.typeC = :typeC")
-    List<Chambre> findByBloc_IdBlocAndTypeC(@Param("idBloc") Long idBloc, @Param("typeC") TypeChambre typeC);
+    @Query("SELECT c FROM Chambre c WHERE c.bloc.idBloc = :idBloc AND c.capacityChambre > 0")
+    List<Chambre> findByBloc_IdBlocAndTypeC(@Param("idBloc") Long idBloc);
 
     @Query("SELECT c FROM Chambre c WHERE c.typeC = :typeC AND c.capacityChambre > 0")
     List <Chambre> findByTypeCWhereAndCapacityChambreGreaterThanZero(@Param("typeC") TypeChambre typeChambre);
+    @Query("SELECT DISTINCT c.typeC FROM Chambre c")
+    List<TypeChambre> getAllByTypeC();
 }

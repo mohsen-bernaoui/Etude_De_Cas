@@ -66,7 +66,6 @@ public class BlocServiceIMP implements IBloc{
 
     @Override
     public List<Bloc> findByFoyerIdfFoyer(long idFoyer) {
-        return blocRepo.findByFoyerIdfFoyer(idFoyer);
+            return blocRepo.findByFoyerIdfFoyer(idFoyer);
+        }
     }
-
-}

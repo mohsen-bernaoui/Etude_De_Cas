@@ -12,6 +12,7 @@ import java.util.Set;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class BlocController {
 private IBloc iBloc;
 

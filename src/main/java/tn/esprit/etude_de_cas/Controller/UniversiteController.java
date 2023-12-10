@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class UniversiteController {
     private UniversiteServiceIMP universiteServiceIMP;
     private FoyerServiceIMP foyerServiceIMP;
