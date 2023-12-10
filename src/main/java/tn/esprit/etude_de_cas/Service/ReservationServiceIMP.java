@@ -6,6 +6,7 @@ import tn.esprit.etude_de_cas.Entity.Reservation;
 import tn.esprit.etude_de_cas.Reposity.ReservationRepo;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -25,4 +26,37 @@ public class ReservationServiceIMP implements IReservation{
     public Reservation retrieveReservation(String idReservation) {
         return reservationRepo.findById(idReservation).orElse(null);
     }
+
+    @Override
+    public Set<Reservation> findReservationsByEtudiantsIdEtudiant(long idEtudiant) {
+        return reservationRepo.findReservationsByEtudiantsId(idEtudiant);
+    }
+
+    @Override
+    public Set<Reservation> findReservationsByEtudiantsNomEt(String nomEt) {
+        return reservationRepo.findReservationsByEtudiantsName(nomEt);
+    }
+
+    @Override
+    public Set<Reservation> findReservationsByEtudiantsNomStartsWithAB() {
+        return reservationRepo.findReservationsByEtudiantsNomStartsWithAB();
+    }
+
+    @Override
+    public Reservation addReservation(Reservation reservation) {
+
+        return reservationRepo.save(reservation);
+    }
+
+    @Override
+    public Reservation deleteReservation(String idReservation) {
+
+        Reservation reservation1 = reservationRepo.findById(idReservation).orElse(null);
+        if (reservation1 == null) {
+            return null;
+        }
+        reservationRepo.deleteById(idReservation);
+        return reservation1;
+    }
+
 }

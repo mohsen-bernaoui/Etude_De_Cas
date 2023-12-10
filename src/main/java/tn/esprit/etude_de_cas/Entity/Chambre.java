@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -21,7 +22,12 @@ public class Chambre implements Serializable {
     @Enumerated(EnumType.STRING)
     private TypeChambre typeC;
 
+    private LocalDateTime lastCleaningDate;
+    private LocalDateTime nextScheduledCleaningDate;
+    private boolean isCleaningScheduled;
+
     @ManyToOne
+    @JsonIgnore
     private  Bloc bloc;
 
     @OneToMany

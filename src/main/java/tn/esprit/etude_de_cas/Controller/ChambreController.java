@@ -6,9 +6,11 @@ import tn.esprit.etude_de_cas.Entity.Chambre;
 import tn.esprit.etude_de_cas.Service.IChambre;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class ChambreController {
     private IChambre iChambre;
     @GetMapping("/retrieveAllChambres")
@@ -26,4 +28,12 @@ public class ChambreController {
 
     @PutMapping("/retrieveChambre/{idChambre}")
     public Chambre retrieveChambre(@PathVariable long idChambre) {return iChambre.retrieveChambre(idChambre);}
+    @GetMapping("/findChambresByBlocIdBloc/{idBloc}")
+    public Set<Chambre> findChambresByBlocIdBloc(@PathVariable Long idBloc) {
+        return iChambre.findChambresByBlocIdBloc(idBloc);
+    }
+
+    @DeleteMapping("/deleteChambre/{idChambre}")
+    public void deleteChambre(@PathVariable long idChambre) {
+        iChambre.deleteChambre(idChambre);}
     }

@@ -1,13 +1,14 @@
 package tn.esprit.etude_de_cas.Controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.etude_de_cas.Entity.Bloc;
-import tn.esprit.etude_de_cas.Service.BlocServiceIMP;
+import tn.esprit.etude_de_cas.Entity.Chambre;
+import tn.esprit.etude_de_cas.Entity.TypeChambre;
 import tn.esprit.etude_de_cas.Service.IBloc;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @AllArgsConstructor
@@ -18,17 +19,9 @@ private IBloc iBloc;
     @GetMapping("/retrieveBlocs")
     public List<Bloc> retrieveBlocs() {return iBloc.retrieveBlocs();}
 
-    @PutMapping("/updateBloc/{idBloc}")
-    public ResponseEntity<Bloc> updateBloc(@RequestBody Bloc updatedBloc, @PathVariable long idBloc){
-        Bloc existingBloc = iBloc.retrieveBloc(idBloc);
-        if (existingBloc != null) {
-            existingBloc.setNomBloc(updatedBloc.getNomBloc());
-            existingBloc.setCapaciteBloc(updatedBloc.getCapaciteBloc());
-            Bloc updatedBlocResult = iBloc.updateBloc(existingBloc, idBloc);
-            return ResponseEntity.ok(updatedBlocResult);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PutMapping("/updateBloc")
+    public Bloc updateBloc(@RequestBody Bloc bloc) {
+        return iBloc.updateBloc(bloc);
     }
 
     @PostMapping("/addBloc")
@@ -46,13 +39,12 @@ private IBloc iBloc;
         iBloc.removeBloc(idBloc);
     }
 
-    @GetMapping("trouverNombreReservationsParBloc/{idBloc}")
-    public int trouverNombreReservationsParBloc(@PathVariable long idBloc) {
-        return iBloc.trouverNombreReservationsParBloc(idBloc);
+    @GetMapping("/findBlocByTypeC/{typC}")
+    public Set<Bloc> findBlocByTypeC(@PathVariable TypeChambre typC){
+        return iBloc.findBlocByChambresType(typC);
     }
-
-    @GetMapping("/countEtudiantsUniquesParBloc/{idBloc}")
-    public int countEtudiantsUniquesParBloc(@PathVariable long idBloc) {
-        return iBloc.countEtudiantsUniquesParBloc(idBloc);
+    @GetMapping("/findBlocBychambres/{idChambre}")
+    public Bloc findBlocByChambres(@PathVariable long idChambre){
+        return iBloc.findBlocByChambresIdChambre(idChambre);
     }
 }

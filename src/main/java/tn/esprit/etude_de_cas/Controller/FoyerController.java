@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class FoyerController {
     @Autowired
     private FoyerServiceIMP foyerServiceImp;
@@ -34,7 +35,13 @@ public class FoyerController {
     public void deleteFoyer(@PathVariable long idF){
         foyerServiceImp.deleteFoyer(idF);
     }
-    @PostMapping("/affecter/{idFoyer}/{nomUniversite}")
+   /* @PostMapping("/affecter/{idFoyer}/{nomUniversite}")
     public ResponseEntity<String> affecterFoyerAUniversite(@PathVariable long idFoyer, @PathVariable String nomUniv) {
-        foyerServiceImp.affecterFoyerAUniversite(idFoyer, nomUniv);return ResponseEntity.ok("Foyer affecté à l'université avec succès");}
+        foyerServiceImp.affecterFoyerAUniversite(idFoyer, nomUniv);return ResponseEntity.ok("Foyer affecté à l'université avec succès");}*/
+   @PostMapping("/affecter/{idFoyer}/{nomUniversite}")
+   public ResponseEntity<String> affecterFoyerAUniversite(@PathVariable long idFoyer, @PathVariable String nomUniversite) {
+       Foyer foyer = foyerServiceImp.affecterFoyerAUniversite(idFoyer, nomUniversite);
+       return ResponseEntity.ok("Foyer affecté à l'université avec succès");
+   }
+
 }

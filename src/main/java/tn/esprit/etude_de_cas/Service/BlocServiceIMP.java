@@ -3,34 +3,25 @@ package tn.esprit.etude_de_cas.Service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.etude_de_cas.Entity.Bloc;
+import tn.esprit.etude_de_cas.Entity.Chambre;
+import tn.esprit.etude_de_cas.Entity.TypeChambre;
 import tn.esprit.etude_de_cas.Reposity.BlocRepo;
-import tn.esprit.etude_de_cas.Reposity.ChambreRepo;
-import tn.esprit.etude_de_cas.Reposity.EtudtiantRepo;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
 public class BlocServiceIMP implements IBloc{
     private BlocRepo blocRepo;
-    private ChambreRepo chambreRepo;
-    private EtudtiantRepo etudtiantRepo;
     @Override
     public List<Bloc> retrieveBlocs() {
         return blocRepo.findAll();
     }
 
     @Override
-    public Bloc updateBloc(Bloc bloc, long idBloc) {
-
-        Bloc existingBloc = blocRepo.findById(idBloc).orElse(null);
-        if (existingBloc != null) {
-            existingBloc.setNomBloc(bloc.getNomBloc());
-            existingBloc.setCapaciteBloc(bloc.getCapaciteBloc());
-            return blocRepo.save(existingBloc);
-        } else {
-            return null;
-        }
+    public Bloc updateBloc(Bloc bloc) {
+        return blocRepo.save(bloc);
     }
 
     @Override
@@ -49,17 +40,13 @@ public class BlocServiceIMP implements IBloc{
     }
 
     @Override
-    public void reserverChambreAvecMiseAJourCapacite(long idBloc, long idChambre, long idEtudiant) {
-
-    }
-    @Override
-    public int trouverNombreReservationsParBloc(long idBloc) {
-        return blocRepo.trouverNombreReservationsParBloc(idBloc);
+    public Set<Bloc> findBlocByChambresType(TypeChambre typeC) {
+        return blocRepo.findBlocByChambresTypeC(typeC);
     }
 
     @Override
-    public int countEtudiantsUniquesParBloc(long idBloc) {
-        return blocRepo.countEtudiantsUniquesParBloc(idBloc);
+    public Bloc findBlocByChambresIdChambre(long idChambre) {
+        return blocRepo.findBlocByChambresIdChambre(idChambre);
     }
 
 
