@@ -34,4 +34,17 @@ public class User implements Serializable
     @JsonIgnore
     private List<Reservation> reservations;
 
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ", name=" + name +
+                ", email=" + email +
+                ", password=" + password +
+                ", roles=" + roles +
+                ", prenomEt=" + prenomEt +
+                ", cin=" + cin +
+                ", ecole=" + ecole +
+                ", dataNaissance=" + dataNaissance
+                ;
+    }
 }

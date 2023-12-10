@@ -46,12 +46,4 @@ private IBloc iBloc;
     public Bloc findBlocByChambres(@PathVariable long idChambre){
         return iBloc.findBlocByChambresIdChambre(idChambre);
     }
-    @PostMapping("/affecterFoyerABloc/{idFoyer}/{idBloc}")
-    public Bloc affecterFoyerABloc(@PathVariable long idFoyer, @PathVariable long idBloc){
-        return iBloc.affecterFoyerABloc(idFoyer, idBloc);
-    }
-    @GetMapping("/findByFoyer/{idFoyer}")
-    public List<Bloc> findByFoyer(@PathVariable long idFoyer){
-        return iBloc.findByFoyerIdfFoyer(idFoyer);
-    }
 }

@@ -16,6 +16,7 @@ public class UserinfoDetails implements UserDetails {
 
     private String name;
     private String password;
+    private String roles;
     private List<GrantedAuthority> authorities;
 
     public UserinfoDetails(User userInfo) {
@@ -24,6 +25,7 @@ public class UserinfoDetails implements UserDetails {
         authorities = Arrays.stream(userInfo.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
+        roles=userInfo.getRoles();
     }
 
     @Override
@@ -40,6 +42,7 @@ public class UserinfoDetails implements UserDetails {
     public String getUsername() {
         return name;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {

@@ -1,15 +1,12 @@
 package tn.esprit.etude_de_cas.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class AuthRequest {
-
-    private String name;
+    private String username;
     private String password;
-
 }

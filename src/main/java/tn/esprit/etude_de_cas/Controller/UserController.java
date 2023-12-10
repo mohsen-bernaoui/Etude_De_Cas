@@ -1,102 +1,128 @@
 package tn.esprit.etude_de_cas.Controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
+
+import org.apache.catalina.connector.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties.Jwt;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.etude_de_cas.Entity.AuthRequest;
+
+import jakarta.servlet.http.HttpServletRequest;
 import tn.esprit.etude_de_cas.Entity.User;
-import tn.esprit.etude_de_cas.Reposity.UserInfoRepository;
+import tn.esprit.etude_de_cas.Entity.UserUpdateRequest;
 import tn.esprit.etude_de_cas.Service.JwtService;
-import tn.esprit.etude_de_cas.Service.UserInfoService;
+import tn.esprit.etude_de_cas.Service.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/auth")
-//integrate angular
-@CrossOrigin(origins ="http://localhost:4200")
+@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
 
-    private UserInfoService service;
-     private UserInfoRepository userInfoRepository;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
     private JwtService jwtService;
 
-    private AuthenticationManager authenticationManager;
+    @PostMapping("/user/update/{id}")
+    public ResponseEntity<Map<String, String>> updateUser(@PathVariable int id,@RequestBody UserUpdateRequest userUpdateRequest) {
 
-    @GetMapping("/welcome")
-    public String welcome() {
-        return "Welcome this endpoint is not secure";
+        try {
+            User user = userUpdateRequest.getUser();
+            User currentuser = jwtService.getUser(userUpdateRequest.token);
+
+            if (id==0) {
+                throw new RuntimeException("id is required");
+            }
+            if(currentuser.getId() != id && !currentuser.getRoles().equals("ROLE_ADMIN")) {
+                throw new RuntimeException("you are not authorized to update this user");
+            }
+            user.setId(id);
+            userService.updateUser(user);
+            Map<String, String> successResponse = new HashMap<>();
+            successResponse.put("status", "success");
+            successResponse.put("message", "user updated successfully");
+            return ResponseEntity.ok().body(successResponse);
+        } catch (Exception e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("status", "error");
+            errorResponse.put("message", e.getMessage());
+            return ResponseEntity.status(Response.SC_INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
     }
 
-    @PostMapping("/addNewUser")
-    public String addNewUser(@RequestBody User userInfo) {
-        return service.addUser(userInfo);
+    @PostMapping("/user/delete/{id}")
+    public ResponseEntity<Map<String, String>> deleteUser(@PathVariable int id, @RequestBody TokenRequest token) {
+        try {
+            if (id==0) {
+                throw new RuntimeException("id is required");
+            }
+            User user = jwtService.getUser(token.getToken());
+            if(user.getId() != id && !user.getRoles().equals("ROLE_ADMIN")) {
+                throw new RuntimeException("you are not authorized to delete this user");
+            }
+            userService.deleteUser(id);
+            Map<String, String> successResponse = new HashMap<>();
+            successResponse.put("status", "success");
+            successResponse.put("message", "user deleted successfully");
+            return ResponseEntity.ok().body(successResponse);
+        } catch (Exception e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("status", "error");
+            errorResponse.put("message", e.getMessage());
+            return ResponseEntity.status(Response.SC_INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
     }
 
-    @PutMapping("/editUser")
-    public String editUser(@RequestBody User userInfo) { return service.editUser(userInfo);}
-
-
-    @GetMapping("/user/userProfile")
-    public String userProfile() {
-        return "Welcome to User Profile";
+    @PostMapping("/user/get/{id}")
+    public ResponseEntity<Map<String, Object>> getUser(@PathVariable int id,@RequestBody TokenRequest token) {
+        try {
+            if (id==0) {
+                throw new RuntimeException("id is required");
+            }
+            User user = jwtService.getUser(token.getToken());
+            if(user.getId() != id && !user.getRoles().equals("ROLE_ADMIN")) {
+                throw new RuntimeException("you are not authorized to get this user");
+            }
+            user = userService.getUserById(id);
+            Map<String, Object> successResponse = new HashMap<>();
+            successResponse.put("status", "success");
+            successResponse.put("message", "user retrieved successfully");
+            successResponse.put("data", user);
+            return ResponseEntity.ok().body(successResponse);
+        } catch (Exception e) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("status", "error");
+            errorResponse.put("message", e.getMessage());
+            return ResponseEntity.status(Response.SC_INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
     }
 
-    @GetMapping("/admin/adminProfile")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public String adminProfile() {
-
-        return "Welcome to Admin Profile";
+    @PostMapping("/user/get-all")
+    public ResponseEntity<Map<String, Object>> getAllUsers(@RequestBody TokenRequest token) {
+        try {
+            User user = jwtService.getUser(token.getToken());
+            if(!user.getRoles().equals("ROLE_ADMIN")) {
+                throw new RuntimeException("you are not authorized to get all users");
+            }
+            Map<String, Object> successResponse = new HashMap<>();
+            successResponse.put("status", "success");
+            successResponse.put("message", "users retrieved successfully");
+            successResponse.put("data", userService.getAllUsers());
+            return ResponseEntity.ok().body(successResponse);
+        } catch (Exception e) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("status", "error");
+            errorResponse.put("message", e.getMessage());
+            return ResponseEntity.status(Response.SC_INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
     }
-
-
-   @PostMapping("/generateToken")
-   public Map<String, Object> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
-       // Log received credentials
-       System.out.println("Received credentials - Username: " + authRequest.getName() + ", Password: " + authRequest.getPassword());
-
-       Authentication authentication = authenticationManager.authenticate(
-               new UsernamePasswordAuthenticationToken(authRequest.getName(), authRequest.getPassword()));
-
-       // Log authentication details
-       System.out.println("Authentication details: " + authentication);
-       if (authentication.isAuthenticated()) {
-           Optional<User> user = userInfoRepository.findByName(authRequest.getName());
-           Map<String, Object> response = new HashMap<>();
-           String token = Long.toString(user.get().getCin());
-           response.put("token", jwtService.generateToken(
-                   Integer.toString(user.get().getId())
-                           +'|'+Long.toString( user.get().getCin())
-                           +'|'+authRequest.getName()
-                           +'|'+user.get().getPrenomEt()
-                           +'|'+user.get().getEmail()
-                           +'|'+user.get().getDataNaissance()
-                           +'|'+user.get().getEcole()
-                           +'|'+user.get().getRoles()
-           ));
-           response.put("role", user.get().getRoles());
-
-           return response;
-       } else {
-           Map<String, Object> response = new HashMap<>();
-           response.put("message", "error");
-           return response;
-       }
-   }
-
-
 
 }
-
-
