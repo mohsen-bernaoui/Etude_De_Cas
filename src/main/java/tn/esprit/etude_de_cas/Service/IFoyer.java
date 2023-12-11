@@ -13,6 +13,7 @@ public interface IFoyer {
     public Foyer affecterFoyerAUniversite(long idFoyer, String nomUniv);
 
     public List<Foyer> getFoyerNotAffected();
+    public List<Foyer> getAllFoyersWithBloc();
 
 
 

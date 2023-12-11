@@ -12,4 +12,7 @@ public interface FoyerRepo extends JpaRepository<Foyer,Long> {
 
     @Query("select f from Foyer f where f.idfFoyer NOT IN ( SELECT u.foyer.idfFoyer from University u WHERE u.foyer IS NOT NULL )")
     List<Foyer> findFoyerNotAffectedToUniversity();
+
+    @Query ("select f from Foyer f JOIN FETCH f.blocs")
+    List<Foyer> findAllFoyersWithBloc();
 }

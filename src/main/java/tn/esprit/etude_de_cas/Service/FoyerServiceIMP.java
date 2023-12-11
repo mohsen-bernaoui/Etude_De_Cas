@@ -71,6 +71,11 @@ public class FoyerServiceIMP implements IFoyer{
     public List<Foyer> getFoyerNotAffected() {
         return foyerRepository.findFoyerNotAffectedToUniversity();
     }
+
+    @Override
+    public List<Foyer> getAllFoyersWithBloc() {
+        return foyerRepository.findAllFoyersWithBloc();
+    }
 }
 
     /*@Override

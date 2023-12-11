@@ -2,6 +2,7 @@ package tn.esprit.etude_de_cas.Controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.etude_de_cas.Entity.Bloc;
@@ -56,6 +57,16 @@ public class FoyerController {
     @GetMapping("/getfoyernotaffected")
     public List<Foyer> getFoyerNotAffected(){
         return foyerServiceImp.getFoyerNotAffected();
+    }
+
+    @GetMapping("/foyers-with-bloc")
+    public ResponseEntity<List<Foyer>> getAllFoyersWithBloc(){
+        try {
+            List<Foyer> foyersWithBloc= foyerServiceImp.getAllFoyersWithBloc();
+            return new ResponseEntity<>(foyersWithBloc, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

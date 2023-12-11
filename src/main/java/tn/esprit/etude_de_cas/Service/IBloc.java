@@ -28,4 +28,7 @@ public interface IBloc {
     int trouverNombreReservationsParBloc(long idBloc);
     int compterChambresParBloc(long idBloc);
 
+    //service avance
+    public void assignBlocToFoyer(Long idfFoyer, Long idBloc);
+
 }
