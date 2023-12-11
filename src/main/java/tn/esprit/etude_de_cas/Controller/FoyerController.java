@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.etude_de_cas.Entity.Bloc;
 import tn.esprit.etude_de_cas.Entity.Foyer;
 import tn.esprit.etude_de_cas.Service.FoyerServiceIMP;
 
@@ -19,9 +20,17 @@ public class FoyerController {
     public Foyer addFoyer(@RequestBody Foyer f){
         return foyerServiceImp.addFoyer(f);
     }
-    @PutMapping("/updateFoyer")
-    public Foyer updateFoyer(@RequestBody Foyer f){
-        return foyerServiceImp.updateFoyer(f);
+    @PutMapping("/updateFoyer/{idfFoyer}")
+    public ResponseEntity<Foyer> updateFoyer(@RequestBody Foyer updatedFoyer, @PathVariable long idfFoyer){
+        Foyer existingFoyer=foyerServiceImp.findById(idfFoyer);
+        if(existingFoyer!=null){
+            existingFoyer.setNomFoyer(updatedFoyer.getNomFoyer());
+            existingFoyer.setCapaciteFoyer(updatedFoyer.getCapaciteFoyer());
+            Foyer updatedFoyerResult=foyerServiceImp.updateFoyer(existingFoyer,idfFoyer);
+            return ResponseEntity.ok(updatedFoyerResult);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
     @GetMapping("/getAllf")
     public List<Foyer> findAllFoyer(){
@@ -43,5 +52,10 @@ public class FoyerController {
        Foyer foyer = foyerServiceImp.affecterFoyerAUniversite(idFoyer, nomUniversite);
        return ResponseEntity.ok("Foyer affecté à l'université avec succès");
    }
+
+    @GetMapping("/getfoyernotaffected")
+    public List<Foyer> getFoyerNotAffected(){
+        return foyerServiceImp.getFoyerNotAffected();
+    }
 
 }

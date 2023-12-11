@@ -1,5 +1,6 @@
 package tn.esprit.etude_de_cas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,5 +19,6 @@ public class University implements Serializable {
     private String adress;
 
     @OneToOne
+    @JsonManagedReference
     private Foyer foyer;
 }

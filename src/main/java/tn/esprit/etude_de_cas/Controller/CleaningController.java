@@ -9,6 +9,7 @@ import tn.esprit.etude_de_cas.Service.CleaningServiceIMP;
 
 @RestController
 @RequestMapping("/cleaning")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CleaningController {
     private final ChambreRepo chambreRepo;
     private final CleaningServiceIMP cleaningServiceIMP;

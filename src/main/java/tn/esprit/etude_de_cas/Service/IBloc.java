@@ -12,7 +12,7 @@ import java.util.Set;
 public interface IBloc {
     List<Bloc> retrieveBlocs();
 
-    Bloc updateBloc (Bloc bloc);
+    public Bloc updateBloc(Bloc bloc, long idBloc);
 
     Bloc addBloc (Bloc bloc);
 
@@ -22,6 +22,10 @@ public interface IBloc {
     Set<Bloc> findBlocByChambresType(TypeChambre typeC);
 
     Bloc findBlocByChambresIdChambre(long idChambre);
-    int trouverNombreReservationsParBloc(@Param("idBloc") long idBloc);
-    int countEtudiantsUniquesParBloc(@Param("idBloc") long idBloc);
+
+    Bloc findBlocById(long idBloc);
+
+    int trouverNombreReservationsParBloc(long idBloc);
+    int compterChambresParBloc(long idBloc);
+
 }

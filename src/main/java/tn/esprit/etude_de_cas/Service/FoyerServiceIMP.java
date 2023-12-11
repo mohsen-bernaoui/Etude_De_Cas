@@ -3,6 +3,7 @@ package tn.esprit.etude_de_cas.Service;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.esprit.etude_de_cas.Entity.Bloc;
 import tn.esprit.etude_de_cas.Entity.Foyer;
 import tn.esprit.etude_de_cas.Entity.University;
 import tn.esprit.etude_de_cas.Reposity.FoyerRepo;
@@ -21,8 +22,15 @@ public class FoyerServiceIMP implements IFoyer{
     }
 
     @Override
-    public Foyer updateFoyer(Foyer f) {
-        return foyerRepository.save(f);
+    public Foyer updateFoyer(Foyer foyer, long idfFoyer) {
+        Foyer existingFoyer = foyerRepository.findById(idfFoyer).orElse(null);
+        if (existingFoyer != null) {
+            existingFoyer.setNomFoyer(foyer.getNomFoyer());
+            existingFoyer.setCapaciteFoyer(foyer.getCapaciteFoyer());
+            return foyerRepository.save(existingFoyer);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -58,7 +66,12 @@ public class FoyerServiceIMP implements IFoyer{
 
         return foyer;
     }
+
+    @Override
+    public List<Foyer> getFoyerNotAffected() {
+        return foyerRepository.findFoyerNotAffectedToUniversity();
     }
+}
 
     /*@Override
     public Foyer affecterFoyerAUniversite(long idFoyer, String nomUniv) {

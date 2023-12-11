@@ -1,5 +1,6 @@
 package tn.esprit.etude_de_cas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,7 @@ public class Foyer implements Serializable {
     private  long capaciteFoyer;
 
     @OneToOne(mappedBy = "foyer")
+    @JsonBackReference
     private University universite;
 
     @OneToMany(mappedBy = "foyer")
