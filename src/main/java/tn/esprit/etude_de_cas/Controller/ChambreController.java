@@ -43,6 +43,7 @@ public class ChambreController {
         return iChambre.findchambrebyTypechambre(idbloc);
     }
 
+
     @GetMapping("/GetchambreByTypeChambre/{typeChambre}")
     public List<Chambre> GetchambreByTypeChambre(@PathVariable TypeChambre typeChambre) {
         return iChambre.GetchambreByTypeChambre(typeChambre);
@@ -53,13 +54,15 @@ public class ChambreController {
         return iChambre.findByBloc_IdBlocAndTypeC(idBloc);
     }
 
+
     @GetMapping("/findChambreByTypeCAndIdBloc/{typeChambre}/{idBloc}")
     public List<Chambre> findChambreByTypeCAndIdBloc(@PathVariable TypeChambre typeChambre, @PathVariable Long idBloc) {
-        return iChambre.findChambreByTypeCAndIdBloc(typeChambre, idBloc);
+        return iChambre.findChambreByTypeCAndIdBloc(typeChambre, idBloc );
     }
+
     @GetMapping("/findByTypeCWhereAndCapacityChambreGreaterThanZero/{typeChambre}")
     public List<Chambre> findByTypeCWhereAndCapacityChambreGreaterThanZero(@PathVariable TypeChambre typeChambre) {
-        return iChambre.findByTypeCWhereAndCapacityChambreGreaterThanZero(typeChambre);
+        return iChambre.findByTypeCWhereAndCapacityChambreGreaterThanZero(typeChambre );
     }
     
 }
