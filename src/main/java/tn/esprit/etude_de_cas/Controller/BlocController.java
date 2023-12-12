@@ -68,4 +68,11 @@ public int compterChambresParBloc(@PathVariable long idBloc){
         return iBloc.compterChambresParBloc(idBloc);
         }
 
+@GetMapping("/findidBlocByfoyerId/{idFoyer}")
+public List<Bloc> findidBlocByfoyerId(@PathVariable long idFoyer){
+        return iBloc.findidBlocByfoyerId(idFoyer);}
+        @GetMapping("/findByFoyer/{idFoyer}")
+        public List<Bloc> findByFoyer(@PathVariable long idFoyer){
+                return iBloc.findByFoyerIdfFoyer(idFoyer);
+        }
         }

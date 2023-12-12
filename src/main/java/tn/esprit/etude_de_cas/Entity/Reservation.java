@@ -1,5 +1,6 @@
 package tn.esprit.etude_de_cas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +19,13 @@ public class Reservation implements Serializable {
     private String idReservation;
     @Temporal(TemporalType.DATE)
     private Date anneUniversitaire;
-    private boolean estValide;
+    @Enumerated(EnumType.STRING)
+    private Status estValide;
 
     @ManyToMany
     private List<User> etudiants;
+
+    @ManyToOne
+    @JsonIgnore
+    private Chambre chambre;
 }

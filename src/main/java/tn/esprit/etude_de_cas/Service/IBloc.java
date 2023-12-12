@@ -28,4 +28,7 @@ public interface IBloc {
     int trouverNombreReservationsParBloc(long idBloc);
     int compterChambresParBloc(long idBloc);
 
+    List<Bloc> findidBlocByfoyerId(long idFoyer);
+    List<Bloc> findByFoyerIdfFoyer(long idFoyer)    ;
+
 }

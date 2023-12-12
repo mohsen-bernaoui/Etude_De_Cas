@@ -58,4 +58,13 @@ public class FoyerController {
         return foyerServiceImp.getFoyerNotAffected();
     }
 
+    @GetMapping("/getFoyerByUniversityId/{idUniversity}")
+    public Foyer findFoyerByUniversityId(@PathVariable long idUniversity) {
+        return foyerServiceImp.findFoyerByUniversityId(idUniversity);
+    }
+    @GetMapping("/getFoyersWithCapacity/{universiteNom}")
+    public List<Foyer> getFoyersWithCapacity(@PathVariable String universiteNom) {
+        return foyerServiceImp.getFoyersWithCapacity(universiteNom);
+    }
+
 }

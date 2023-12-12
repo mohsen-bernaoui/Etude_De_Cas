@@ -18,5 +18,6 @@ public interface IReservation {
     Set<Reservation> findReservationsByEtudiantsNomStartsWithAB();
     Reservation addReservation(Reservation reservation);
     Reservation deleteReservation (String idReservation);
-
+    Reservation postReservationWithIdEtudiantAndIdChambre(Reservation reservation, int idEtudiant, int idChambre);
+    Reservation updateReservationById(Reservation reservation, String idReservation);
 }

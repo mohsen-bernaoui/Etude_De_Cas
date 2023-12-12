@@ -14,6 +14,9 @@ public interface IFoyer {
 
     public List<Foyer> getFoyerNotAffected();
 
+    Foyer findFoyerByUniversityId(long idUniversity);
+
+    public List<Foyer> getFoyersWithCapacity(String universiteNom);
 
 
 }

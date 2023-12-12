@@ -8,6 +8,7 @@ import tn.esprit.etude_de_cas.Entity.Bloc;
 import tn.esprit.etude_de_cas.Entity.Chambre;
 import tn.esprit.etude_de_cas.Entity.TypeChambre;
 
+import java.util.List;
 import java.util.Set;
 
 @Repository
@@ -22,5 +23,5 @@ public interface BlocRepo extends JpaRepository<Bloc,Long> {
             "LEFT JOIN c.reservations r " +
             "WHERE b.idBloc = :idBloc")
     int trouverNombreReservationsParBloc(@Param("idBloc") long idBloc);
-
+    List<Bloc> findByFoyerIdfFoyer(long idFoyer);
 }

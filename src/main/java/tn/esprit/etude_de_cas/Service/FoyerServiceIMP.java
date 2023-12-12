@@ -71,6 +71,20 @@ public class FoyerServiceIMP implements IFoyer{
     public List<Foyer> getFoyerNotAffected() {
         return foyerRepository.findFoyerNotAffectedToUniversity();
     }
+
+    @Override
+    public Foyer findFoyerByUniversityId(long idUniversity) {
+        return foyerRepository.findFoyerByUniversityId(idUniversity);
+    }
+    @Override
+    public List<Foyer> getFoyersWithCapacity(String universiteNom) {
+        University universite = universityRepo.findByNomUniversity(universiteNom);
+        if (universite == null) {
+            throw new RuntimeException("Université non trouvée");
+        }
+        return foyerRepository.findFoyerWithCapacity(universite);
+    }
+
 }
 
     /*@Override

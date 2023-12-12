@@ -21,6 +21,7 @@ public class Chambre implements Serializable {
     private  long numChambre;
     @Enumerated(EnumType.STRING)
     private TypeChambre typeC;
+    private long capacity;
 
     private LocalDateTime lastCleaningDate;
     private LocalDateTime nextScheduledCleaningDate;
@@ -30,6 +31,6 @@ public class Chambre implements Serializable {
     @JsonIgnore
     private  Bloc bloc;
 
-    @OneToMany
+    @OneToMany(mappedBy = "chambre")
     private List<Reservation> reservations;
 }

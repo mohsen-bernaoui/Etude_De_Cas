@@ -48,4 +48,13 @@ public class ReservationController {
         return iReservation.deleteReservation(idReservation);
     }
 
+    @PostMapping("/postReservationWithIdEtudiantAndIdChambre/{idEtudiant}/{idChambre}")
+    public Reservation postReservationWithIdEtudiantAndIdChambre(@RequestBody Reservation reservation, @PathVariable int idEtudiant, @PathVariable int idChambre) {
+        return iReservation.postReservationWithIdEtudiantAndIdChambre(reservation, idEtudiant, idChambre);
+    }
+
+    @PutMapping("/updateReservationById/{idReservation}")
+    public Reservation updateReservationById(@RequestBody Reservation reservation, @PathVariable String idReservation) {
+        return iReservation.updateReservationById(reservation, idReservation);
+    }
 }
