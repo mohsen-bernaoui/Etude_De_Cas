@@ -13,6 +13,13 @@ import tn.esprit.etude_de_cas.Reposity.FoyerRepo;
 import java.util.List;
 import java.util.Set;
 
+// les exceptions
+import tn.esprit.etude_de_cas.Exceptions.FoyerNotFoundException;
+import tn.esprit.etude_de_cas.Exceptions.BlocNotFoundException;
+import tn.esprit.etude_de_cas.Exceptions.CapaciteFoyerEpuiseeException;
+import tn.esprit.etude_de_cas.Exceptions.BlocDejaReserveException;
+
+
 @Service
 @AllArgsConstructor
 public class BlocServiceIMP implements IBloc{
@@ -86,4 +93,25 @@ public class BlocServiceIMP implements IBloc{
     public List<Bloc> findByFoyerIdfFoyer(long idFoyer) {
         return blocRepo.findByFoyerIdfFoyer(idFoyer);
     }
+
+    @Override
+    public void assignBlocToFoyer(Long idfFoyer, Long idBloc) {
+        Foyer foyer = foyerRepo.findById(idfFoyer).orElseThrow(FoyerNotFoundException::new);
+        Bloc bloc = blocRepo.findById(idfFoyer).orElseThrow(BlocNotFoundException::new);
+        if (bloc.getFoyer() == null) {
+            if (foyer.getCapaciteFoyer() > 0) {
+                bloc.setFoyer(foyer);
+                foyer.setCapaciteFoyer(foyer.getCapaciteFoyer() - bloc.getCapaciteBloc());
+
+                blocRepo.save(bloc);
+                foyerRepo.save(foyer);
+            } else {
+                throw new CapaciteFoyerEpuiseeException();
+            }
+
+        } else {
+            throw new BlocDejaReserveException();
+        }
+    }
+
 }

@@ -31,4 +31,7 @@ public interface IBloc {
     List<Bloc> findidBlocByfoyerId(long idFoyer);
     List<Bloc> findByFoyerIdfFoyer(long idFoyer)    ;
 
+    //service avance
+    public void assignBlocToFoyer(Long idfFoyer, Long idBloc);
+
 }

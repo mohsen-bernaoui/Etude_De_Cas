@@ -85,6 +85,11 @@ public class FoyerServiceIMP implements IFoyer{
         return foyerRepository.findFoyerWithCapacity(universite);
     }
 
+
+    @Override
+    public List<Foyer> getAllFoyersWithBloc() {
+        return foyerRepository.findAllFoyersWithBloc();
+    }
 }
 
     /*@Override
