@@ -1,4 +1,5 @@
 package tn.esprit.etude_de_cas.Controller;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -92,12 +93,14 @@ public class BlocController {
                 } catch (BlocDejaReserveException e) {
                         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
                 }
-@GetMapping("/findidBlocByfoyerId/{idFoyer}")
-public List<Bloc> findidBlocByfoyerId(@PathVariable long idFoyer){
-        return iBloc.findidBlocByfoyerId(idFoyer);}
+
+        }
+        @GetMapping("/findidBlocByfoyerId/{idFoyer}")
+        public List<Bloc> findidBlocByfoyerId(@PathVariable long idFoyer){
+                return iBloc.findidBlocByfoyerId(idFoyer);}
+
         @GetMapping("/findByFoyer/{idFoyer}")
         public List<Bloc> findByFoyer(@PathVariable long idFoyer){
                 return iBloc.findByFoyerIdfFoyer(idFoyer);
-        }
         }
 }
